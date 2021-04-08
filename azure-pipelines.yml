@@ -28,6 +28,3 @@ steps:
   - task: RunMATLABCommand@0
     inputs:
       command: ver
-  - task: RunMATLABCommand@0
-    inputs:
-      command: userpath
