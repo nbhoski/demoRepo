@@ -1,0 +1,33 @@
+strategy:
+  matrix:
+    linux:
+      imageName: 'ubuntu-16.04'
+    mac:
+     imageName: 'macOS-10.15'
+    windows:
+      imageName: 'vs2017-win2016'
+
+pool:
+  vmImage: $(imageName)
+steps:
+  - powershell: Write-Host '##vso[task.prependpath]C:\Program Files\MATLAB\R2020b\bin'
+  - task: InstallMATLAB@0
+  - task: RunMATLABTests@0
+    inputs:
+      testResultsJUnit: 'test-results/results.xml'
+      codeCoverageCobertura: 'code-coverage/coverage.xml'
+      sourceFolder: src/folderA;src/folderB;src/model
+  - task: PublishTestResults@2
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFiles: 'test-results/results.xml'
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: 'code-coverage/coverage.xml'
+  - task: RunMATLABCommand@0
+    inputs:
+      command: ver
+  - task: RunMATLABCommand@0
+    inputs:
+      command: userpath
