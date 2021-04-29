@@ -12,7 +12,7 @@ jobs:
       - matlab/run-tests:
           test-results-junit: test-results/matlab/results.xml
           code-coverage-cobertura:  test-results/code-coverage/coverage.xml
-          source-folder: src/folderA;src/folderB;
+          source-folder: src/folderA;src/folderB
       - matlab/run-command:
           command: ver
       - matlab/run-command:
