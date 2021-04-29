@@ -1,0 +1,22 @@
+version: 2.1
+orbs:
+  matlab: mathworks/matlab@0.1
+  codecov: codecov/codecov@1.1.0
+jobs:
+  build:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - matlab/install
+      - matlab/run-tests:
+          test-results-junit: test-results/matlab/results.xml
+          code-coverage-cobertura:  test-results/code-coverage/coverage.xml
+          source-folder: src/folderA;src/folderB;src/model
+      - matlab/run-command:
+          command: ver
+      - matlab/run-command:
+          command: userpath
+      - store_artifacts:
+          path: test-results
+          destination: artifacts
