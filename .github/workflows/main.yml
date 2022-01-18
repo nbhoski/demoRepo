@@ -23,7 +23,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: install chocolaty
-        run: choco --install-arguments="'/l*v c:\gh_msi_install.log'" install gh 
+        run: choco install --install-arguments="'/l*v c:\gh_msi_install.log'" gh 
        #run: choco install gh
        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
      # - uses: actions/checkout@v2
